@@ -1,0 +1,23 @@
+{
+  "name": "learning_react",
+  "version": "0.0.0",
+  "description": "Learning React examples",
+  "main": "index.js",
+  "scripts": {
+    "test": "learning_react_test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tousdroitsreserves/learning_react.git"
+  },
+  "keywords": [
+    "React",
+    "JS"
+  ],
+  "author": "Karolis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tousdroitsreserves/learning_react/issues"
+  },
+  "homepage": "https://github.com/tousdroitsreserves/learning_react#readme"
+}
