@@ -8,7 +8,7 @@ const Summary = createClass({
         return {
             ingredients: 0,
             steps: 0,
-            name: "[Untitled Recipe]",
+            title: "[Untitled Recipe]",
         };
     },
     propTypes: {
@@ -22,7 +22,7 @@ const Summary = createClass({
             <div className="summary">
                 <h1>{title}</h1>
                 <p>
-                    <span>{ingredients.length} Ingredients</span>
+                    <span>{ingredients.length} Ingredients | </span>
                     <span>{steps.length} Steps</span>
                 </p>
             </div>
