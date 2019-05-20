@@ -1,9 +1,25 @@
 import React from 'react';
 import ReactDom from 'react-dom';
+import {render} from 'react-dom';
+import Menu from './Menu';
+import data from './data/recipes';
+import Summary from "./Summary";
 
-const title = 'Minima React Webpack Babel setup';
+window.React = React;
 
-ReactDom.render(
-    <div>{title}</div>,
-    document.getElementById('app')
+render(
+    <Summary />,
+    document.getElementById('react-container')
 );
+
+// render(
+//     <Menu recipes={data} />,
+//     document.getElementById('react-container')
+// );
+
+// ReactDom.render(
+//     <div>{title}</div>,
+//     document.getElementById('app')
+// );
+//
+// module.hot.accept();
