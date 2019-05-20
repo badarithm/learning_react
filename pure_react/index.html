@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Pure React Samples</title>
+</head>
+    <body>
+
+<!-- Target container -->
+        <div id="react-container"></div>
+
+<!-- React library & ReactDOM-->
+        <script src="https://unpkg.com/react@15.4.2/dist/react.js"></script>
+        <script src="https://unpkg.com/react-dom@15.4.2/dist/react-dom.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.29/browser.js"></script>
+<script type="text/babel">
+            const rootId = "react-container";
+            let data = [
+                {
+                    "name": "Baked Salmon",
+                    "ingredients" : [
+                        { "name": "Salmon", "amount": 1, "measurement": "l lb" },
+                        { "name": "Pine Nuts", "amount": 1, "measurement": "cup" },
+                        { "name": "Butter Lettuce", "amount": 2, "measurement": "cups" },
+                        { "name": "Salmon", "amount": 1, "measurement": "l lb" },
+                        { "name": "Pine Nuts", "amount": 1, "measurement": "cup" },
+                        { "name": "Butter Lettuce", "amount": 2, "measurement": "cups" },
+                    ],
+                    "steps" : [
+                        "Preheat the oven to 350 degrees.",
+                        "Spread the olive oil around a glass baking dish.",
+                        "Add the salmon, garlic, and pine nuts to the dish.",
+                        "Bake for 15 minutes.",
+                        "Add the yellow squash and put back in the oven for 30 mins.",
+                        "Remove from oven and let cool for 15 minutes. Add the lettuce and serve."
+                    ]
+                },
+                {
+                "name": "Fish Tacos",
+                    "ingredients": [
+                    { "name": "Whitefish", "amount": 1, "measurement": "l lb" },
+                    { "name": "Cheese", "amount": 1, "measurement": "cup" },
+                    { "name": "Iceberg Lettuce", "amount": 2, "measurement": "cups" },
+                    { "name": "Tomatoes", "amount": 2, "measurement": "large"},
+                    { "name": "Tortillas", "amount": 3, "measurement": "med" }
+                    ],
+                    "steps": [
+                    "Cook the fish on the grill until hot.",
+                    "Place the fish on the 3 tortillas.",
+                    "Top them with lettuce, tomatoes, and cheese."
+                    ]
+                }
+            ];
+
+            const Recipe = ({name, ingredients, steps}) =>
+                <section id={name.toLowerCase().replace(/ /g, "-")}>
+                    <h1>{name}</h1>
+                    <ul className="ingredients">
+                        {ingredients.map((ingredient, index) =>
+                            <li key={index}>{ingredient.name}</li>)}
+                    </ul>
+                    <section className="instructions">
+                        <h2>Cooking Instructions</h2>
+                        {steps.map((step, index) => <p key={index}>{step}</p>)}
+                    </section>
+                </section>
+            export default Recipe;
+
+
+
+            const IngredientsList = ({list}) =>
+                <ul className="ingredients">
+                    {list.map((ingredients, index) =>
+                    <Ingredient key={index} {...ingredients}/>)}
+                </ul>
+
+            const Menu = ({title, recipes}) =>
+                <article>
+                    <header>
+                        <h1>{title}</h1>
+                    </header>
+                    <div className="recipes">
+                        {recipes.map((recipe, index) =>
+                        <Recipe key={index} {...recipe} />
+                        )}
+                    </div>
+                </article>
+            export default Menu;
+
+            const Instructions = ({title, steps}) =>
+                <section className="instructions">
+                    <h2>{title}</h2>
+                    {steps.map((step, index) => <p key={index}>{step}</p>)}
+                </section>
+            export default Instructions;
+
+            ReactDOM.render(
+                <Menu recipes={data} title="Delicious Recipes" />,
+                document.getElementById(rootId)
+            )
+            //
+            // let dish = React.createElement("ul", {className: "ingredients"},
+            // items.map((ingredient, index) => {return React.createElement("li", {key: index}, ingredient);}));
+            //
+            // ReactDOM.render(dish, document.getElementById(rootId));
+
+            // const IngredientsList = React.createClass({
+            //     displayName: "IngredientsList",
+            //     render() {
+            //         return React.createElement("ul", {"className": "ingredients"},
+            //         this.props.items.map((ingredient, index) => React.createElement("li", {key: index}, ingredient)))
+            //     }
+            // });
+
+            // const list = React.createElement(IngredientsList, null, null);
+
+            //
+            // const IngredientsList = React.createClass({
+            //     displayName: "IngredientsList",
+            //     renderListItem(ingredient, index) {
+            //         return React.createElement("li", {key: index}, ingredient)
+            //     },
+            //     render() {
+            //         return React.createElement("ul", {className: "ingredients"},
+            //         this.props.items.map(this.renderListItem))
+            //     }
+            // });
+
+            // the same thing rewritten as class
+
+            // class IngredientsList extends React.Component {
+            //     renderListItem(ingredient, index) {
+            //         return React.createElement("li", {key: index}, ingredient)
+            //     }
+            //
+            //     render() {
+            //         return React.createElement("ul", {className: "ingredients"},
+            //             this.props.items.map(this.renderListItem))
+            //     }
+            // }
+
+            // stateless functional compoenents
+
+            // const IngredientsList = ({items}) =>
+            //     React.createElement("ul", {className: "ingredients"},
+            //         items.map((ingredient, index) =>
+            //         React.createElement("li", {key: index}, ingredient)));
+            //
+            // ReactDOM.render(
+            //     React.createElement(IngredientsList, {items}, null),
+            //     document.getElementById(rootId)
+            // );
+
+        </script>
+    </body>
+</html>
