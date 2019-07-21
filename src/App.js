@@ -3,6 +3,56 @@ import {v4} from 'uuid'
 import React from 'react'
 
 
+class MemberList extends React.Component {
+    constructor() {
+        super()
+        this.state = {
+            members: [],
+            loading: false,
+            error: null,
+        }
+    }
+
+    componentWillMount() {
+        this.setState({loading: true})
+        getFakeMembers(this.props.count).then(
+            members => {
+                this.setState({members, loading: false})
+            },
+            error => {
+                this.setState({error, loading: false})
+            }
+        );
+    }
+
+    componentWillupdate() {
+        console.log('updating lifecycle');
+    }
+
+    render() {
+
+    }
+}
+
+const getFakeMembers = count => new Promise((resolves, rejects) => {
+    const api = `https://api.randomuser.me/?nat=US&results=${count}`
+    const request = new XMLHttpRequest()
+    request.open('GET', api)
+    request.onload = () => (request.status == 200) ?
+        resolves(JSON.parse(request.response).results):
+        reject(Error(request.statusText))
+    request.onerror = error => rejects(error)
+    request.send()
+})
+
+const Member = ({email, picture, name, location}) =>
+    <div className="member">
+        <img src={picture.thumbnail} alt="" />
+        <h1>{name.first} {name.last}</h1>
+        <p><a href={"mailto:" + email}>{email}</a></p>
+        <p>{location.city}, {location.state}</p>
+    </div>
+
 const Color = ({title, color, rating=0, onRemove=f=>f, onRate=f=>f}) =>
     <section className="color">
         <h1>{title}</h1>
@@ -15,10 +65,10 @@ const Color = ({title, color, rating=0, onRemove=f=>f, onRate=f=>f}) =>
         </div>
     </section>
 
-const ColorList = ({ colors: [], onRate=f=>f, onRemove=f=>f}) =>
+const ColorList = ({colors = [], onRate=f=>f, onRemove=f=>f}) =>
     <div className="color-list">
         {(0 === colors.length) ?
-            <p>No Colors Listed. (Add Color)</p>:
+            <p>No Colors Listed. (Add Color) {colors.length}</p>:
             colors.map(color =>
             <Color key={color.id} {...color}
                 onRate={(rate) => onRate(color.id, rating)}
@@ -40,6 +90,7 @@ class App extends React.Component {
     }
 
     addColor(title, color) {
+        console.log(title, color)
         const colors = [
             ...this.state.colors,
             {

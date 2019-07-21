@@ -1,4 +1,4 @@
-import React from 'react';
+import {React} from 'react';
 import ReactDom from 'react-dom';
 import {render} from 'react-dom';
 import Menu from './Menu';
@@ -35,6 +35,8 @@ const colors = {
         }
     ]
 };
+console.log(colors);
+console.log({...colors});
 // <StarRating totalStars={7} starsSelected={3}/>,
 render(
     <App {...colors}/>,
